@@ -11,13 +11,13 @@ app.use(cors());         // Reactからのクロスドメイン通信を許可�
 
 // MySQLとの接続プールを作成（効率的な接続管理）
 const db = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: process.env.MYSQLHOST || 'localhost',
+  user: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || 'password',
+  database: process.env.MYSQLDATABASE || 'qr_db',
+  port: Number(process.env.MYSQLPORT) || 3306,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
 });
 
 // 接続テスト
@@ -91,6 +91,8 @@ app.put('/api/scans/checked', (req, res) => {
 
 // サーバーの起動
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`🚀 サーバーが起動しました: http://localhost:${PORT}`);
-});
+initDb().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Backend is running on port ${PORT}`);
+  });
+}).catch(console.error);
