@@ -21,24 +21,40 @@ const db = mysql.createPool({
   ssl: { rejectUnauthorized: false },
 });
 
-async function initDb() {
-  try {
-    const connection = await db.getConnection();
-    // scans テーブルが存在しない場合は作成する
-    await connection.execute(`
-      CREATE TABLE IF NOT EXISTS inventory (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        location TEXT NOT NULL,
-        item_name TEXT NOT NULL,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        is_checked BOOLEAN NOT NULL DEFAULT TRUE
-      )
-    `);
-    connection.release();
-    console.log("Database initialized & table verified/created successfully.");
-  } catch (error) {
-    console.error("Failed to initialize database:", error);
-  }
+// データベースの初期化（コールバック形式に修正）
+function initDb() {
+  return new Promise((resolve) => {
+    db.getConnection((err, connection) => {
+      if (err) {
+        console.error("Failed to initialize database (getConnection):", err);
+        return resolve();
+      }
+
+      // scans テーブルが存在しない場合は作成する
+      connection.query(
+        `
+        CREATE TABLE IF NOT EXISTS inventory (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          location TEXT NOT NULL,
+          item_name TEXT NOT NULL,
+          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          is_checked BOOLEAN NOT NULL DEFAULT TRUE
+        )
+      `,
+        (err) => {
+          connection.release();
+          if (err) {
+            console.error("Failed to initialize database (query):", err);
+          } else {
+            console.log(
+              "Database initialized & table verified/created successfully.",
+            );
+          }
+          resolve();
+        },
+      );
+    });
+  });
 }
 
 // 接続テスト
