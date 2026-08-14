@@ -5,6 +5,20 @@ require("dotenv").config();
 
 const app = express();
 
+const cors = require("cors");
+
+// VercelのURL（またはすべてのドメインを許可する場合は '*'）を設定
+const corsOptions = {
+  origin: [
+    "https://inventory-lilac-sigma.vercel.app/",
+    "http://localhost:5173",
+  ], // ここにVercelのURLを入れる
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 // ミドルウェアの設定
 app.use(express.json()); // JSON形式のリクエストボディを解析できるようにする
 app.use(cors()); // Reactからのクロスドメイン通信を許可する
