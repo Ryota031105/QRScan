@@ -12,10 +12,11 @@ export default function Page() {
   const { ref } = useZxing({
     onDecodeResult(result) {
       if (!isScanning) return;
-      if (lastScannedRef.current === result.rawValue) {
+      if (lastScannedRef.current == result.rawValue) {
         console.log("同じよ！");
         return;
       }
+      lastScannedRef.current = result.rawValue;
       handleScan(result.rawValue);
     },
   });
