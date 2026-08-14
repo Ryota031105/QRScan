@@ -22,7 +22,7 @@ const db = mysql.createPool({
 
 async function initDb() {
   try {
-    const connection = await pool.getConnection();
+    const connection = await db.getConnection();
     // scans テーブルが存在しない場合は作成する
     await connection.execute(`
       CREATE TABLE IF NOT EXISTS inventory (
