@@ -20,6 +20,26 @@ const db = mysql.createPool({
   connectionLimit: 10,
 });
 
+async function initDb() {
+  try {
+    const connection = await pool.getConnection();
+    // scans テーブルが存在しない場合は作成する
+    await connection.execute(`
+      CREATE TABLE IF NOT EXISTS inventory (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        location TEXT NOT NULL,
+        item_name TEXT NOT NULL,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        is_checked BOOLEAN NOT NULL DEFAULT TRUE
+      )
+    `);
+    connection.release();
+    console.log("Database initialized & table verified/created successfully.");
+  } catch (error) {
+    console.error("Failed to initialize database:", error);
+  }
+}
+
 // 接続テスト
 db.getConnection((err, connection) => {
   if (err) {
