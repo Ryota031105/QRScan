@@ -5,8 +5,6 @@ require("dotenv").config();
 
 const app = express();
 
-const cors = require("cors");
-
 // VercelのURL（またはすべてのドメインを許可する場合は '*'）を設定
 const corsOptions = {
   origin: [
