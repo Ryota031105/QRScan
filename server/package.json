@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "main.tsx",
   "scripts": {
     "dev": "ts-node-dev --respawn server.js",
     "build": "tsc",
