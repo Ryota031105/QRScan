@@ -70,7 +70,7 @@ export default function Page() {
   };
 
   return (
-    <div className="fixed inset-0 w-full h-full bg-black overflow-hidden">
+    <div>
       <div>
         <video
           ref={ref}
