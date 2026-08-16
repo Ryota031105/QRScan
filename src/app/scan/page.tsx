@@ -72,7 +72,10 @@ export default function Page() {
   return (
     <div>
       <div>
-        <video ref={ref} className="fixed inset-0 w-full h-full object-cover" />
+        <video
+          ref={ref}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
       </div>
       <div
         className={`absolute top-0 left-0 right-0 z-50 p-4 transition-all duration-500 ease-out transform ${
