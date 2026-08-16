@@ -53,6 +53,11 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
     },
+    initialState: {
+      pagination: {
+        pageSize: 7, // 好きな行数（例: 5, 10, 20 など）に変更できます
+      },
+    },
   });
 
   return (
