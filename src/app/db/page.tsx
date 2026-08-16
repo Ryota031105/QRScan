@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/column";
 import { format } from "date-fns";
@@ -116,10 +116,10 @@ export default function Page() {
           />
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>
+              <AlertDialogTitle className="whitespace-nowrap">
                 チェック状態をリセットしますか？
               </AlertDialogTitle>
-              <AlertDialogDescription>
+              <AlertDialogDescription className="whitespace-nowrap">
                 この操作は元に戻せません。
                 <br />
                 全てのチェック状態が未チェックに更新されます。
@@ -134,9 +134,7 @@ export default function Page() {
           </AlertDialogContent>
         </AlertDialog>
       </div>
-      <Suspense fallback={"Loading"}>
-        <DataTable columns={columns} data={items} />
-      </Suspense>
+      <DataTable columns={columns} data={items} />
     </div>
   );
 }
