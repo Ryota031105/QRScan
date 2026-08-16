@@ -1,7 +1,7 @@
-import { DataTable } from "@/components/data-table";
-import { columns } from "@/components/column";
+import { DataTable } from "@/components/dbtable/data-table";
+import { columns } from "@/components/dbtable/column";
 import { useItems } from "@/hooks/useItem";
-import { ItemActions } from "@/components/item-actions";
+import { ItemActions } from "@/components/dbtable/item-actions";
 
 export default function Page() {
   const { items, updateCheckedStatus, downloadCsv } = useItems();

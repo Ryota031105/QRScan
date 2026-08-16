@@ -1,6 +1,6 @@
-import { Scanner } from "@/components/Scanner/scanner";
-import { ScanAlert } from "@/components/Scanner/scan-alert";
-import { ScanGuide } from "@/components/Scanner/scan-guide";
+import { Scanner } from "@/components/scanner/scanner";
+import { ScanAlert } from "@/components/scanner/scan-alert";
+import { ScanGuide } from "@/components/scanner/scan-guide";
 import { useScan } from "@/hooks/useScan";
 
 export default function Page() {
