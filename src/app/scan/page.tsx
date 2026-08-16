@@ -1,9 +1,12 @@
 import { useRef, useState } from "react";
+import { InfoIcon, Scan } from "lucide-react";
 import { useZxing } from "react-zxing";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function Page() {
   const [showDialog, setShowDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState("");
+  const [dialogTitle, setDialogTitle] = useState("");
   const [isScanning, setIsScanning] = useState(true);
   const lastScannedRef = useRef<string | null>(null);
 
@@ -44,17 +47,16 @@ export default function Page() {
 
       const result = await response.json();
 
+      setDialogContent(`所在地：${location}\n物品名：${itemName}`);
+
       // 新規か更新かでメッセージを出し分ける
       if (result.status === "updated") {
-        setDialogContent(
-          `下記の物品情報を更新しました。\n\n所在地：${location}\n物品名：${itemName}`,
-        );
+        setDialogTitle(`下記の物品をスキャンしました`);
       } else {
-        setDialogContent(
-          `下記の物品は未登録です。\n新規登録します。\n\n所在地：${location}\n品名：${itemName}`,
-        );
+        setDialogTitle(`下記の新規物品をスキャンしました`);
       }
       setShowDialog(true);
+      setTimeout(closeDialog, 3000);
     } catch (e) {
       console.error(e);
       alert("QRデータの解析、またはサーバーとの通信に失敗しました。");
@@ -68,44 +70,31 @@ export default function Page() {
   };
 
   return (
-    <div>
-      <h2>QRスキャンページ</h2>
-
-      <div className="m-auto">
-        <video ref={ref} className="w-full h-full object-cover rounded-lg" />
+    <div className="fixed inset-0 w-full h-full bg-black overflow-hidden">
+      <div>
+        <video
+          ref={ref}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
       </div>
-
-      {showDialog && (
-        <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            background: "white",
-            border: "1px solid #ccc",
-            padding: "20px",
-            boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-            zIndex: 100,
-          }}
-        >
-          <pre
-            style={{
-              margin: "0 0 20px 0",
-              fontFamily: "inherit",
-              whiteSpace: "pre-wrap",
-            }}
-          >
+      <div
+        className={`absolute top-0 left-0 right-0 z-50 p-4 transition-all duration-500 ease-out transform ${
+          showDialog
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full opacity-0"
+        }`}
+      >
+        <Alert>
+          <InfoIcon />
+          <AlertTitle>{dialogTitle}</AlertTitle>
+          <AlertDescription className="whitespace-pre-line">
             {dialogContent}
-          </pre>
-          <button
-            onClick={closeDialog}
-            style={{ padding: "8px 16px", cursor: "pointer" }}
-          >
-            OK
-          </button>
-        </div>
-      )}
+          </AlertDescription>
+        </Alert>
+      </div>
+      <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
+        <Scan color="#ffffff" strokeWidth={0.5} size={5400} />
+      </div>
     </div>
   );
 }
