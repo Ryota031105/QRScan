@@ -24,6 +24,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
+import { LuSearch } from "react-icons/lu";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -78,16 +79,19 @@ export function DataTable<TData, TValue>({
     <div>
       {/* 検索フィルター（所在地で絞り込み） */}
       <div className="flex items-center justify-center py-4">
-        <Input
-          placeholder="所在地で検索..."
-          value={
-            (table.getColumn("location")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("location")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+        <div className="relative max-w-sm">
+          <LuSearch className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="所在地で検索..."
+            value={
+              (table.getColumn("location")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("location")?.setFilterValue(event.target.value)
+            }
+            className="pl-9"
+          />
+        </div>
       </div>
 
       {/* テーブル本体 */}
