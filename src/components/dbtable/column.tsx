@@ -20,7 +20,7 @@ export const columns: ColumnDef<Item>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="-ml-4" // 左側の余白を調整
+          className="-ml-3" // 左側の余白を調整
         >
           所在地
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -35,7 +35,7 @@ export const columns: ColumnDef<Item>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="-ml-4"
+          className="-ml-3"
         >
           物品名
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -50,7 +50,7 @@ export const columns: ColumnDef<Item>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="-ml-4"
+          className="-ml-3"
         >
           更新日
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -78,7 +78,7 @@ export const columns: ColumnDef<Item>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="-ml-4"
+          className="-ml-3"
         >
           チェック状態
           <ArrowUpDown className="ml-2 h-4 w-4" />
