@@ -14,6 +14,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { LuDownload } from "react-icons/lu";
@@ -115,8 +116,10 @@ export default function Page() {
           />
           <AlertDialogContent>
             <AlertDialogHeader>
+              <AlertDialogTitle>
+                チェック状態をリセットしますか？
+              </AlertDialogTitle>
               <AlertDialogDescription>
-                <h2 color="black">チェック状態をリセットしますか？</h2>
                 この操作は元に戻せません。
                 <br />
                 全てのチェック状態が未チェックに更新されます。
