@@ -66,7 +66,7 @@ export default function Page() {
 
   const closeDialog = () => {
     setShowDialog(false);
-    setIsScanning(true); // スキャン再開
+    setIsScanning(true);
   };
 
   return (
