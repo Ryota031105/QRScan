@@ -55,7 +55,7 @@ export function DataTable<TData, TValue>({
     },
     initialState: {
       pagination: {
-        pageSize: 7, // 好きな行数（例: 5, 10, 20 など）に変更できます
+        pageSize: 6, // 好きな行数（例: 5, 10, 20 など）に変更できます
       },
     },
   });
