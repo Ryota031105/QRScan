@@ -1,3 +1,4 @@
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useRef, useState } from "react";
 import { useZxing } from "react-zxing";
 
@@ -71,8 +72,8 @@ export default function Page() {
     <div>
       <h2>QRスキャンページ</h2>
 
-      <div style={{ maxWidth: "400px", margin: "0 auto" }}>
-        <video ref={ref} style={{ width: "100%", borderRadius: "8px" }} />
+      <div className="m-auto">
+        <video ref={ref} className="w-full h-full object-cover rounded-lg" />
       </div>
 
       {showDialog && (
