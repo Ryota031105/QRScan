@@ -1,6 +1,9 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { ja } from "date-fns/locale";
+import { Button } from "@/components/ui/button";
+import { ArrowUpDown } from "lucide-react";
+
 export type Item = {
   id: number;
   location: string;
@@ -12,33 +15,76 @@ export type Item = {
 export const columns: ColumnDef<Item>[] = [
   {
     accessorKey: "location",
-    header: "所在地",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="-ml-4" // 左側の余白を調整
+        >
+          所在地
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "item_name",
-    header: "物品名",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="-ml-4"
+        >
+          物品名
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "updated_at",
-    header: "更新日",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="-ml-4"
+        >
+          更新日
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const rawDate = row.getValue("updated_at") as string;
       if (!rawDate) return "-";
 
       try {
-        // date-fns を使って "YYYY/MM/DD HH:mm" 形式に変換
         const formatted = format(new Date(rawDate), "yyyy/MM/dd HH:mm:ss", {
           locale: ja,
         });
         return <span>{formatted}</span>;
       } catch (e) {
-        return <span>{rawDate}</span>; // 万が一パースエラーになったらそのまま表示
+        return <span>{rawDate}</span>;
       }
     },
   },
   {
     accessorKey: "is_checked",
-    header: "チェック状態",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="-ml-4"
+        >
+          チェック状態
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const isChecked = row.getValue("is_checked");
       return (
