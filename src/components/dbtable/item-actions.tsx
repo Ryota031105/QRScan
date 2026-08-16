@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RiResetLeftLine } from "react-icons/ri";
 import { LuDownload } from "react-icons/lu";
@@ -10,8 +11,16 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { AiOutlineBars } from "react-icons/ai";
 
 interface ItemActionsProps {
   onDownloadCsv: () => void;
@@ -22,21 +31,39 @@ export function ItemActions({
   onDownloadCsv,
   onResetChecked,
 }: ItemActionsProps) {
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+
   return (
     <div className="flex items-center justify-center py-4">
-      <Button variant="outline" onClick={onDownloadCsv} className="mx-2">
-        <LuDownload />
-        CSVダウンロード
-      </Button>
-      <AlertDialog>
-        <AlertDialogTrigger
+      <DropdownMenu>
+        <DropdownMenuTrigger
           render={
-            <Button variant="destructive" className="mx-2">
-              <RiResetLeftLine />
-              チェック状態のリセット
+            <Button variant="outline">
+              <AiOutlineBars />
             </Button>
           }
         />
+        <DropdownMenuContent className="w-auto" align="start">
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Options</DropdownMenuLabel>
+            <DropdownMenuItem onClick={onDownloadCsv}>
+              <LuDownload />
+              CSVダウンロード
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => {
+                setIsAlertOpen(true);
+              }}
+            >
+              <RiResetLeftLine />
+              チェック状態のリセット
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
         <AlertDialogContent className="max-w-lg">
           <AlertDialogHeader>
             <AlertDialogTitle>
@@ -50,7 +77,12 @@ export function ItemActions({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>戻る</AlertDialogCancel>
-            <AlertDialogAction onClick={onResetChecked}>
+            <AlertDialogAction
+              onClick={() => {
+                onResetChecked();
+                setIsAlertOpen(false);
+              }}
+            >
               リセット
             </AlertDialogAction>
           </AlertDialogFooter>

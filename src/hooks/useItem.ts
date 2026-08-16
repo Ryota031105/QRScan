@@ -23,7 +23,7 @@ export function useItems() {
   const updateCheckedStatus = async () => {
     try {
       await resetCheckedStatus();
-      fetchItems();
+      getItems();
     } catch (e) {
       console.error(e);
     }
