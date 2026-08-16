@@ -92,7 +92,7 @@ export default function Page() {
           </AlertDescription>
         </Alert>
       </div>
-      <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
+      <div className="absolute inset-0 flex items-center justify-center p-6 z-10 -mt-8">
         <Scan color="#ffffff" strokeWidth={0.5} size={500} />
       </div>
     </div>
