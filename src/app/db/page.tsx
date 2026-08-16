@@ -114,12 +114,12 @@ export default function Page() {
               </Button>
             }
           />
-          <AlertDialogContent>
+          <AlertDialogContent className="max-w-lg">
             <AlertDialogHeader>
-              <AlertDialogTitle className="whitespace-nowrap">
+              <AlertDialogTitle>
                 チェック状態をリセットしますか？
               </AlertDialogTitle>
-              <AlertDialogDescription className="whitespace-nowrap">
+              <AlertDialogDescription>
                 この操作は元に戻せません。
                 <br />
                 全てのチェック状態が未チェックに更新されます。
