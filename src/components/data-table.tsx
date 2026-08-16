@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useEffect } from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -53,12 +54,29 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
     },
-    initialState: {
-      pagination: {
-        pageSize: 6, // 好きな行数（例: 5, 10, 20 など）に変更できます
-      },
-    },
   });
+
+  useEffect(() => {
+    const updatePageSize = () => {
+      const height = window.innerHeight;
+
+      // 画面の高さ（px）に応じて行数を切り替える
+      if (height < 700) {
+        table.setPageSize(5); // 小さめの画面（スマホや小型PC）
+      } else if (height < 900) {
+        table.setPageSize(10); // 標準的なノートPCなど
+      } else {
+        table.setPageSize(15); // 大きめのデスクトップモニター
+      }
+    };
+
+    // 初回実行
+    updatePageSize();
+
+    // ウィンドウサイズが変更されたときにも連動させる
+    window.addEventListener("resize", updatePageSize);
+    return () => window.removeEventListener("resize", updatePageSize);
+  }, [table]);
 
   return (
     <div>
