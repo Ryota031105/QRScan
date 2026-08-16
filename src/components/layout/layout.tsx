@@ -18,7 +18,7 @@ export default function Layout() {
           <Outlet />
         </div>
         <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-          <nav className="pointer-events-auto fixed bottom-0 mb-30">
+          <nav className="pointer-events-auto fixed bottom-0 mb-10">
             <ButtonGroup>
               <Button
                 onClick={() => setActiveTab("/")}
