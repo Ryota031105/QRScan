@@ -120,13 +120,7 @@ app.get("/api/scans", (req, res) => {
 // APIエンドポイント: チェック状態の一括更新
 // ==========================================
 app.put("/api/scans/checked", (req, res) => {
-  const { ids, is_checked } = req.body;
-
-  if (!ids || ids.length === 0)
-    return res.status(400).json({ error: "IDがありません" });
-
-  const query = "UPDATE inventory SET is_checked = ? WHERE id IN (?)";
-  db.query(query, [is_checked, ids], (err) => {
+  db.query("UPDATE inventory SET is_checked = false", (err) => {
     if (err) return res.status(500).json({ error: "更新エラー" });
     res.status(200).json({ success: true });
   });
