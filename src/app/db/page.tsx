@@ -101,14 +101,14 @@ export default function Page() {
   return (
     <div>
       <div className="flex items-center justify-center py-4">
-        <Button variant="outline" onClick={downloadCsv} className="mx-3">
+        <Button variant="outline" onClick={downloadCsv} className="mx-2">
           <LuDownload />
           CSVダウンロード
         </Button>
         <AlertDialog>
           <AlertDialogTrigger
             render={
-              <Button variant="destructive" className="mx-3">
+              <Button variant="destructive" className="mx-2">
                 <RiResetLeftLine />
                 チェック状態のリセット
               </Button>
@@ -116,10 +116,8 @@ export default function Page() {
           />
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>
-                <span color="black">チェック状態をリセットしますか？</span>
-              </AlertDialogTitle>
               <AlertDialogDescription>
+                <h2 color="black">チェック状態をリセットしますか？</h2>
                 この操作は元に戻せません。
                 <br />
                 全てのチェック状態が未チェックに更新されます。
