@@ -117,7 +117,7 @@ export default function Page() {
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>
-                チェック状態をリセットしますか？
+                <span color="black">チェック状態をリセットしますか？</span>
               </AlertDialogTitle>
               <AlertDialogDescription>
                 この操作は元に戻せません。
