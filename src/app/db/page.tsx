@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { DataTable } from "@/components/data-table";
 import { columns } from "@/components/column";
 import { format } from "date-fns";
@@ -134,7 +134,9 @@ export default function Page() {
           </AlertDialogContent>
         </AlertDialog>
       </div>
-      <DataTable columns={columns} data={items}></DataTable>
+      <Suspense fallback={"Loading"}>
+        <DataTable columns={columns} data={items} />
+      </Suspense>
     </div>
   );
 }
