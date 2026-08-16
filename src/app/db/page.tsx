@@ -101,14 +101,14 @@ export default function Page() {
   return (
     <div>
       <div className="flex items-center justify-center py-4">
-        <Button variant="outline" onClick={downloadCsv}>
+        <Button variant="outline" onClick={downloadCsv} className="mx-5">
           <LuDownload />
           CSVダウンロード
         </Button>
         <AlertDialog>
           <AlertDialogTrigger
             render={
-              <Button variant="destructive">
+              <Button variant="destructive" className="mx-5">
                 <RiResetLeftLine />
                 チェック状態のリセット
               </Button>
