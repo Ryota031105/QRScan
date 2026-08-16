@@ -1,4 +1,3 @@
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useRef, useState } from "react";
 import { useZxing } from "react-zxing";
 
